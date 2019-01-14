@@ -17,7 +17,8 @@ After installation and joining a wireless network, the program will be ready to 
 ## Wiring
 The setup will require an external power supply. I used a 5v, 2A unit [1]. A screwed terminal block DC connector [2] will suffice for the prototyping stage. You will of course need a string of WS2801s [3], which can be separated or joined to the length desired. Each light will draw a maximum of 60 mA, so make sure to use a power supply which can support the total current drawn.
 
-<Picture>
+![Picard](https://github.com/cobelu/Picard/blob/master/picard_wiring.png)
+
 
 Do NOT forget to ground the Pi to the LED strip. The wiring is as follows:
 
@@ -29,6 +30,7 @@ The program will run indefinitely until the power is cut or the program is termi
 *	LIFR -> Purple
 *	Request failure -> Blue
 
+## Read more
 1. https://www.adafruit.com/product/276
 2. https://www.adafruit.com/product/368 
 3. https://www.amazon.com/WS2801-Individually-Addressable-Digital-Non-waterproof/dp/B0192VUDNG/ref=sr_1_1?s=apparel&ie=UTF8&qid=1515374206&sr=8-1&keywords=WS2801 
