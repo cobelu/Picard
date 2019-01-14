@@ -1,0 +1,64 @@
+# Connor Luckett
+# Metar v1.0
+# main.py
+# Last updated 12/30/17
+
+# RUN THIS FILE
+
+# This program uses the Aviation Weather REST API: https://avwx.rest/
+
+# Standard files
+import time
+
+# Files I did not write
+import RPi.GPIO as GPIO
+import Adafruit_WS2801 as ws
+import Adafruit_GPIO.SPI as SPI
+
+# Project files
+import airport
+import colors
+
+
+def main():
+
+    # THIS IS THE LIST OF AIRPORTS. SUPPORTS AS MANY AS LED'S YOU HAVE
+    identifier_list = ["KGYI", "KDUA", "KDFW", "KLAX"]
+
+    # Build the strip and initialize all to blinking blue
+    PIXEL_COUNT = len(identifier_list) - 1  # ZERO-INDEXED!    
+    SPI_PORT = 0
+    SPI_DEVICE = 0
+    strip = ws.WS2801Pixels(PIXEL_COUNT, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+    strip.set_pixels(colors.lightBlue)
+    strip.show()
+
+    print('Press Ctrl-C to quit')
+
+    # Empty list of airport objects
+    airport_objects_list = []
+
+    # Build the airport objects
+    i = 1
+    for name in identifier_list:
+        airport_objects_list.append(airport.Airport(strip, name, i))  # Add each airport object to the list
+        i += 1
+
+    # Infinite while loop to keep it going
+    while True:
+
+        # Update each airfield
+        for airfield in airport_objects_list:
+            airfield.update_airport()  # Update airport color
+
+            strip.set_pixel(airfield.position - 1, airfield.color)  # Update LED color (REMEMBER: STRIP IS ZERO-INDEXED!)
+            strip.show()  # Apply change
+
+            print(airfield.to_string())
+
+        # METARs update hourly, so let's check every 10 minutes
+        time.sleep(600)
+
+
+if __name__ == "__main__":
+    main()
