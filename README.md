@@ -17,10 +17,10 @@ After installation and joining a wireless network, the program will be ready to 
 ## Wiring
 The setup will require an external power supply. I used a 5v, 2A unit [1]. A screwed terminal block DC connector [2] will suffice for the prototyping stage. You will of course need a string of WS2801s [3], which can be separated or joined to the length desired. Each light will draw a maximum of 60 mA, so make sure to use a power supply which can support the total current drawn.
 
+Do NOT forget to ground the Pi to the LED strip. The wiring is as follows:
+
 ![Picard](https://github.com/cobelu/Picard/blob/master/picard_wiring.png)
 Wiring Diagram. [4].
-
-Do NOT forget to ground the Pi to the LED strip. The wiring is as follows:
 
 ## Notes
 The program will run indefinitely until the power is cut or the program is terminated by pressing Ctrl + C. During initialization, all LEDs will show light blue. As data is fetched the LEDs are updated. The program updates every so often so as not to overload the API. Once updated, the update will be displayed on the console, and the color of the individual LED will change to match the condition:
